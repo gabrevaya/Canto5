@@ -6,19 +6,17 @@ Created on Tue Mar  7 16:34:20 2017
 
 """
 
-
-
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy
-import scipy.io.wavfile as sw
+#import scipy
+#import scipy.io.wavfile as sw
 from scipy import signal
 from scipy import interpolate
 
 
-#def envolvente(raw_audio,times,sample_rate,data_points,bin_size=100,mean=0):
+#def envolvente(raw_audio,times,sample_rate,data_points,bin_size=100,mean=0,der=0):
 
-def envolvente(raw_audio,times,sample_rate,data_points=None,bin_size=None,mean=0):
+def envolvente(raw_audio,times,sample_rate,data_points=None,bin_size=None,mean=0,der=0):
     """
     Finds a wrapping-signal of a raw-audio wave, dividing the set of pints in packages of a 
     given number of points (bin_size), and computing the max or mean value of the signal in 
@@ -27,14 +25,15 @@ def envolvente(raw_audio,times,sample_rate,data_points=None,bin_size=None,mean=0
     Input: raw_audio, timebase, sample rate and total number of data points of the audio file,
            (output of read_wav.py executed on a single file). (Optional): specify bin_size 
            (=100 by default); specify if you want to consider the  maximum (mean=0, default) 
-           or mean (mean=1) value of the data points in bin_size. 
+           or mean (mean=1) value of the data points in bin_size; specify if you want to 
+           derivate the signal setting der=1 (0 by default).
     Output: resultant wrapping-signal
     """
     if data_points is None:
         data_points=len(times)
     
     if bin_size is None:
-        bin_size=data_points/1e3
+        bin_size=int(data_points/1e3)
     
     #[sample_rate, raw_audio] = sw.read(file)
     #raw_audio = np.array(raw_audio)
@@ -62,7 +61,7 @@ def envolvente(raw_audio,times,sample_rate,data_points=None,bin_size=None,mean=0
     t_new = times[t_start:new_len:bin_size]
     
     tck = interpolate.splrep(t_new, smooth_wave, s=0)
-    envolvente = interpolate.splev(times, tck, der=0)
+    envolvente = interpolate.splev(times, tck, der)
     
     plt.figure(figsize=(30,10))
     plt.plot(times,raw_audio)
@@ -72,5 +71,5 @@ def envolvente(raw_audio,times,sample_rate,data_points=None,bin_size=None,mean=0
     plt.ylabel('amplitud')
     #plt.plot(times,peaks,'.')
     
-    #return
+    #return envolvente, times, ..
     pass
