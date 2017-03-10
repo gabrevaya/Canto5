@@ -1,0 +1,108 @@
+# -*- coding: utf-8 -*-
+
+from get_files_paths import get_files_paths
+from read_wav import read_wav
+from envolvente import envolvente
+from find_syllables import find_syllables
+from split_syllables import split_syllables
+
+
+Definición de funciones:
+
+
+################################################################################
+
+def get_files_paths(root, extension, info_file):
+
+    '''
+    Extrae todos las direcciones de archivos con una extensión deseada dentro de
+    todas las subcarpetas de "root" y lee la información que se encuentra en el
+    archivo "info_file".
+    
+    input:
+        root: (string) dirección de raíz en la que se buscarán archivos
+        extension: (string) extensión de los archivos que se busca
+        info_file: (string) archivo que contiene información acerca de los archivos
+        
+    output:
+        paths_to_files: (list) cada elemento de esta lista contiene una tupla, cada
+            tupla contiene en la primera posición la info (string) asociada al
+            archivo y en la segunda la dirección al archivo.
+            
+    Ej: paths_to_files = get_files_paths('./datos', 'wav', 'bird_name.txt')
+    
+    '''
+    ...
+    return paths_to_files
+
+#################################################################################
+
+    
+ def read_wav(audio_file):
+    
+    '''
+    Read wav files.
+    
+    Input: file path.
+    Output: raw audio amplitudes, corresponding times, sample rate, number of
+    samples.
+    '''    
+    ...
+    return raw_audio, times, sample_rate, n_samples
+
+#################################################################################
+
+
+def envolvente(raw_audio, times, sample_rate, data_points=None, bin_size=None, mean=0, der=0):
+    """
+    Finds a wrapping-signal of a raw-audio wave, dividing the set of pints in packages of a 
+    given number of points (bin_size), and computing the max or mean value of the signal in 
+    each one of them.
+
+    Input: raw_audio, timebase, sample rate and total number of data points of the audio file,
+           (output of read_wav.py executed on a single file). (Controls): specify bin_size 
+           (=100 by default); specify if you want to consider the  maximum (mean=0, default) 
+           or mean (mean=1) value of the data points in bin_size; specify if you want to 
+           derivate the signal setting der=1 (0 by default).
+           
+    Output: resultant wrapping-signal
+    """
+    ...
+    return envolv, times
+    
+    
+####################################################################################
+
+def find_syllables(raw_audio, times, env, t_env, npoints_umbral, fbird) 
+   '''
+   Finds the time windows where the syllables are, inside the raw-audio file.
+   
+   Input: raw_audio, times - Amplitud and time vector of the original audio file 
+                             (only to plot a explanary graf).
+          env, t_env       - Amplitud and time vector of the wrapping wave of the  
+                             audio signal.
+          npoints_umbral   - Number of points counted from the start, considered
+                             to estimate a threshold value "umbral" that the 
+                             amplitud of the syllable usually surpasses.
+   Output: loc_silaba      - Boolean signal identifying the time windows where the 
+                             syllables are. (mask)
+                             
+   '''
+   ...
+   return loc_silabas
+   
+##################################################################################
+
+def split_syllables(signal, boo, margin):
+
+    '''
+    Use a boolean mask signal to split the signal.
+
+    input: signal (numpy array), boo (boolean array), margin (int)
+    output: syllables(list of numpy arrays)
+
+    '''
+    ...
+    return b
+    
+################################################################################
