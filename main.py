@@ -10,6 +10,7 @@ def main():
     audios = get_files_paths()
     envelope = envolvente()
     spectre = s1pectrum()
+    
 
 
 if __name__ == "__main__":
