@@ -20,13 +20,14 @@ def read_wav(audio_file):
     t_fin = n_samples/sample_rate
     times = np.arange(0,t_fin,1/sample_rate)
     
-    #plt.figure(figsize=(30,10))
+    #fig=plt.figure(figsize=(30,10))
+    #fig=plt.figure()
     plt.plot(times,raw_audio)
     plt.xlabel('tiempo (s)')
     plt.ylabel('amplitud')
     
     plt.show()
-    plt.save('raw_audio.png')
-    plt.close()
+    #fig.savefig('raw_audio.png')
+    #plt.close('all')
 
     return raw_audio, times, sample_rate, n_samples
