@@ -4,6 +4,7 @@ Created on Thu Mar  9 18:12:41 2017
 
 @author: ger
 """
+import numpy as np
 
 def split_syllables(signal, boo, margin):
 
