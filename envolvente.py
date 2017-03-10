@@ -7,6 +7,7 @@ from scipy import signal
 from scipy import interpolate
 
 
+#def envolvente(raw_audio, times, sample_rate, data_points=None, bin_size=None, mean=0, der=0, direccion, guardar)
 
 def envolvente(raw_audio, times, sample_rate, data_points=None, bin_size=None, mean=0, der=0):
     """
@@ -15,10 +16,11 @@ def envolvente(raw_audio, times, sample_rate, data_points=None, bin_size=None, m
     each one of them.
 
     Input: raw_audio, timebase, sample rate and total number of data points of the audio file,
-           (output of read_wav.py executed on a single file). (Optional): specify bin_size 
+           (output of read_wav.py executed on a single file). (Controls): specify bin_size 
            (=100 by default); specify if you want to consider the  maximum (mean=0, default) 
            or mean (mean=1) value of the data points in bin_size; specify if you want to 
            derivate the signal setting der=1 (0 by default).
+           
     Output: resultant wrapping-signal
     """
     if data_points is None:
@@ -63,5 +65,10 @@ def envolvente(raw_audio, times, sample_rate, data_points=None, bin_size=None, m
     plt.ylabel('amplitud')
     #plt.plot(times,peaks,'.')
     plt.show()
+    
+    #if guardar:
+    #    plt.savefig(direccion+'.png')
+    
+    plt.close()
     
     return envolv, times

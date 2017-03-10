@@ -46,7 +46,8 @@ def find_syllables(raw_audio, times, env, t_env, npoints_umbral, fbird)
     plt.ylabel('amplitud')
 
     plt.show()
-
+    plt.save('loc_silabas.png')
+    plt.close()
 
     #loc_index=np.diff(loc_silabas)
     #plt.plot(loc_index)
