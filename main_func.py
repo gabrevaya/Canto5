@@ -78,13 +78,20 @@ def main(directorio, bin_size, fbird):
         #plt.savefig(directorio+'silabas.png')
         plt.close()
         
+        
+        #fig1, ax1= plt.subplots(nro_sil, 1)
+        
+        #Pxx, freqs, bins, im = plt.specgram(raw_audio, NFFT=NFFT, Fs=sample_rate, noverlap=900)
+        
         NFFT = 1024
-        fig1, ax1= plt.subplots(nro_sil, 1)
-        
+        ax1 = plt.subplot(211)
         Pxx, freqs, bins, im = plt.specgram(raw_audio, NFFT=NFFT, Fs=sample_rate, noverlap=900)
-        
-        for sil in range(nro_sil):
-			
-            Pxx, freqs, bins, im = plt.specgram(raw_audio, NFFT=NFFT, Fs=sample_rate, noverlap=900)
-            plt.show()
+        plt.subplot(212, sharex=ax1)
+        plt.plot(times,raw_audio)
+        plt.show()
+
+        #for sil in range(nro_sil):
+		#	
+        #    Pxx, freqs, bins, im = plt.specgram(raw_audio, NFFT=NFFT, Fs=sample_rate, noverlap=900)
+        #    plt.show()
     
