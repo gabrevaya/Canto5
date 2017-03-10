@@ -58,6 +58,7 @@ def get_files_paths(root, extension, info_file):
                 #paths_to_files.append((info,target_file_path))
                 #paths_to_files.append((target_file_path,target_file[:-4]))
                 paths_to_files.append(target_file_path)
-                file_names.append(target_file[:-4])
-                bird_names.append(info)
+                name = target_file.replace(target, '')
+                file_names.append(name)
+                bird_names.append(info[:-1])
     return [paths_to_files, file_names, bird_names]
