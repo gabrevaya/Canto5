@@ -8,7 +8,8 @@ from read_wav import read_wav
 from get_files_paths import get_files_paths
 from find_syllables import find_syllables
 from split_syllables import split_syllables
-#from spectrum import spectrum
+from spectrum import spectrum
+
 
 #def main(bin_size, fbird):
 #def main(directorio, bin_size, fbird):

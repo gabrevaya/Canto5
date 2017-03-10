@@ -1,43 +1,40 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy.signal as sig
-import scipy.io.wavfile as sw
+def spectrum(audio,sample_rate):
+    '''
+    Esta función calcula el espectrograma de una señal. Tambien puede usarse
+    (si se descomenta la segunda sección para conseguir un "filtrado" de los
+    puntos del espectrograma, osea, las frecuancias con una amplitud mayor a la
+    especificada por la variable "treshold" ).
 
-op = './datos/albanella/call1.wav'                                    #@#@#@#
-[fs, x] = sw.read(op)
+    Argumentos: audio , sample_rate
+    audio: un array 1D al que se le aplica el espectrograma
+    sample_rate: la frecuenca de sampleo del audio.
 
-N = len(x)
+    Devuelve: t,f,Sxx
+    Los resultados del espectrograma
+    '''
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import scipy.signal as sig
 
-time = np.arange(N) / float(fs)
+    fs = sample_rate
+    N = len(audio)
+    time = np.arange(N) / float(fs)
+    f, t, Sxx = sig.spectrogram(audio, fs,nperseg=500,nfft=512, noverlap=400,mode='magnitude')
 
-f, t, Sxx = sig.spectrogram(x, fs,nperseg=500,nfft=512, noverlap=400,mode='magnitude')
+    '''
+    descomentar lo siguiente para usar el filtro de datos. xx e yy contienen los
+    indices de la matriz Sxx donde se encuentran los valores mayores al umbral
+    (treshold)
+    '''
+    # big = Sxx.max(axis=1)
+    # big = big.max()
+    # treshold = big * 0.50
+    #
+    # valid = np.where(Sxx>=treshold)
+    # valid = np.c_[valid[0],valid[1]]
+    # xx = valid[0]
+    # yy = valid[1]
+    # xs = np.arange(len(t))
+    # ys = np.arange(len(f))
 
-
-print Sxx.shape
-print Sxx[0,0],Sxx[1,0]
-print t[0],t[1],t[2]
-
-
-maximo = Sxx.max(axis=1)
-maximo = maximo.max()
-print "maximo= ", maximo
-
-umbral = maximo * 0.50
-
-validos = np.where(Sxx>=umbral)
-
-validos = np.c_[validos[0],validos[1]]
-
-puntos_validos = []
-[puntos_validos.append([ t[v[1]],f[v[0]] ]) for v in validos]
-
-print "fs= ", fs
-print f[0:5],f[-1]
-print Sxx
-# ax1 = plt.subplot(211)
-# plt.pcolormesh(t, f, Sxx)
-# plt.ylabel('Frequency [Hz]')
-# plt.xlabel('Time [sec]')
-# plt.subplot(212, sharex=ax1)
-# plt.plot(puntos_validos[0],puntos_validos[1])
-# plt.show()
+    return f,t,Sxx
