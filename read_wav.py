@@ -25,4 +25,8 @@ def read_wav(audio_file):
     plt.xlabel('tiempo (s)')
     plt.ylabel('amplitud')
     
+    plt.show()
+    plt.save('raw_audio.png')
+    plt.close()
+
     return raw_audio, times, sample_rate, n_samples
