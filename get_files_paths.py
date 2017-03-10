@@ -13,21 +13,20 @@ import numpy as np
 def get_files_paths(root, extension, info_file):
 
     '''
-    Extrae todos las direcciones de archivos con una extensión deseada dentro de
-    todas las subcarpetas de "root" y lee la información que se encuentra en el
-    archivo "info_file".
-    
+    Extract all paths of files with a certain extension inside all subfolders
+    of "root" folder. Also read the information contained in the file "info_file".
+        
     input:
-        root: (string) dirección de raíz en la que se buscarán archivos
-        extension: (string) extensión de los archivos que se busca
-        info_file: (string) archivo que contiene información acerca de los archivos
+        root: (string) root path within which the files will be searched
+        extension: (string) file extension of the desired files
+        info_file: (string) file name of the information file
         
     output:
-        paths_to_files: (list) cada elemento de esta lista contiene una tupla, cada
-            tupla contiene en la primera posición la info (string) asociada al
-            archivo y en la segunda la dirección al archivo.
+        paths_to_files: (list) each element in this list contains a tuple. The
+            1st position of each tuple conteins the info (string) associated
+            to the file and the 2nd position, the file path (string).
             
-    Ej: paths_to_files = get_files_paths('./datos', 'wav', 'bird_name.txt')
+    Ex: paths_to_files = get_files_paths('./datos', 'wav', 'bird_name.txt')
     
     '''
     root = "./datos"
@@ -37,11 +36,16 @@ def get_files_paths(root, extension, info_file):
     paths_to_files = []
     target = '.' + extension
     
-    
+    # os.walk(root) generates a list which elements are tuples with the form
+    # (path, dirs, files), one for each folders and subfolders of root
     for (path, dirs, files) in os.walk(root):
+        
+        # create a list with the file names of files with the target extension
         target_files = []
         target_files = [file for file in files if target in file]
         
+        # if there is any target file in the current folder, save its path and
+        # read the info file
         if not target_files == []:
     #        print((path, dirs, files))        
             with open(os.path.join(path,info_file),'r') as f:
