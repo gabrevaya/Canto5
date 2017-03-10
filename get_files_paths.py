@@ -34,6 +34,8 @@ def get_files_paths(root, extension, info_file):
     info_file = "bird_name.txt"
     
     paths_to_files = []
+    file_names=[]
+    bird_names=[]
     target = '.' + extension
     
     # os.walk(root) generates a list which elements are tuples with the form
@@ -53,6 +55,9 @@ def get_files_paths(root, extension, info_file):
             
             for target_file in target_files:
                 target_file_path = os.path.join(path, target_file)        
-                paths_to_files.append((info,target_file_path))
-                
-    return paths_to_files
+                #paths_to_files.append((info,target_file_path))
+                #paths_to_files.append((target_file_path,target_file[:-4]))
+                paths_to_files.append(target_file_path)
+                file_names.append(target_file[:-4])
+                bird_names.append(info)
+    return [paths_to_files, file_names, bird_names]
