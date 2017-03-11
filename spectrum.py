@@ -1,17 +1,26 @@
+"""
+This function calcuates the spectrogram of a signal. It also can be used
+for getting the coordinates of points with a frequency-amplitude greater
+than certain treshold (uncommenting the last lines).
+"""
+
+# Created on Thu Mar  9 18:12:41 2017
+#
+# @author: ger
+# """
 def spectrum(audio,sample_rate):
-    '''
-    Esta función calcula el espectrograma de una señal. Tambien puede usarse
-    (si se descomenta la segunda sección para conseguir un "filtrado" de los
-    puntos del espectrograma, osea, las frecuancias con una amplitud mayor a la
-    especificada por la variable "treshold" ).
+    """
+    input:
+        audio (1D array). Signal to transform.
+        sample_rate (float). Sampling frequency of the audio file corresponding
+        to 'audio'.
+    output:
+        t (1d array). Times corresponding to the second component of 'Sxx'
+        f (1d array). Frequencies corresponding to the first component of 'Sxx'
+        Sxx (array). Spectrogram. Frequency-amplitudes as functions of times
+        and frequencies.
+    """
 
-    Argumentos: audio , sample_rate
-    audio: un array 1D al que se le aplica el espectrograma
-    sample_rate: la frecuenca de sampleo del audio.
-
-    Devuelve: t,f,Sxx
-    Los resultados del espectrograma
-    '''
     import numpy as np
     import matplotlib.pyplot as plt
     import scipy.signal as sig
