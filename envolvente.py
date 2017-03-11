@@ -56,7 +56,7 @@ def envolvente(raw_audio, times, sample_rate, data_points=None, bin_size=None, m
     
     tck = interpolate.splrep(t_new, smooth_wave, s=0)
     envolv = interpolate.splev(times, tck, der)
-    
+    '''
     #plt.figure(figsize=(30,10))
     plt.plot(times,raw_audio)
     #plt.plot(t_new,smooth_wave)
@@ -70,5 +70,5 @@ def envolvente(raw_audio, times, sample_rate, data_points=None, bin_size=None, m
     #    plt.savefig(direccion+'.png')
     
     plt.close()
-    
+    '''
     return envolv, times
