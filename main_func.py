@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 from envolvente import envolvente
 from read_wav import read_wav
-from get_files_paths import get_files_paths
+from get_files_paths_1 import get_files_paths
 from find_syllables import find_syllables
 from split_syllables import split_syllables
 #from spectrum import spectrum
@@ -82,16 +82,26 @@ def main(directorio, bin_size, fbird):
         #fig1, ax1= plt.subplots(nro_sil, 1)
         
         #Pxx, freqs, bins, im = plt.specgram(raw_audio, NFFT=NFFT, Fs=sample_rate, noverlap=900)
-        
+       
         NFFT = 1024
+        
+        # To plot spectrum of the complete audio file uncomment this code
+        
+        
         ax1 = plt.subplot(211)
         Pxx, freqs, bins, im = plt.specgram(raw_audio, NFFT=NFFT, Fs=sample_rate, noverlap=900)
         plt.subplot(212, sharex=ax1)
         plt.plot(times,raw_audio)
         plt.show()
-
-        #for sil in range(nro_sil):
-		#	
-        #    Pxx, freqs, bins, im = plt.specgram(raw_audio, NFFT=NFFT, Fs=sample_rate, noverlap=900)
-        #    plt.show()
+        
+        
+        for sil in range(nro_sil):
+            ax1 = plt.subplot(211)
+            Pxx, freqs, bins, im = plt.specgram(silabas[sil], NFFT=NFFT, Fs=sample_rate, noverlap=900)
+            plt.subplot(212, sharex=ax1)
+            plt.plot(time_windows[sil],silabas[sil])
+            #plt.xlabel('Time (s)')
+            #plt.ylabel('Frequency')
+            plt.show()
+        
     
