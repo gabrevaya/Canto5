@@ -1,5 +1,8 @@
+'''
+Finds the time windows where the syllables are, inside the raw-audio file.
+'''
 # -*- coding: utf-8 -*-
- 
+
 from read_wav import read_wav
 from envolvente import envolvente
 import numpy as np
@@ -9,28 +12,26 @@ import matplotlib.pyplot as plt
 #[raw_audio, times, sample_rate, data_points]=read_wav(audio_file)
 #[env, t_env]=envolvente(raw_audio, times, sample_rate, data_points, 1000, 1, 0)
 
-def find_syllables(raw_audio, times, env, t_env, npoints_umbral, fbird): 
+def find_syllables(raw_audio, times, env, t_env, npoints_umbral, fbird):
     '''
-    Finds the time windows where the syllables are, inside the raw-audio file.
-   
-    Input: raw_audio, times - Amplitud and time vector of the original audio file 
+    Input: raw_audio, times - Amplitud and time vector of the original audio file
                               (only to plot a explanary graf).
-           env, t_env       - Amplitud and time vector of the wrapping wave of the  
+           env, t_env       - Amplitude and time vector of the wrapping wave of the
                               audio signal.
            npoints_umbral   - Number of points counted from the start, considered
-                              to estimate a threshold value "umbral" that the 
-                              amplitud of the syllable usually surpasses.
-    Output: loc_silaba      - Boolean signal identifying the time windows where the 
+                              to estimate a threshold value "umbral" that the
+                              amplitude of the syllable usually surpasses.
+    Output: loc_silaba      - Boolean signal identifying the time windows where the
                               syllables are. (mask)
-                             
+
     '''
 
     #npoints_umbral=100
-    
+
     umbral=np.max(env[:npoints_umbral])
 
     #print ("umbral=",umbral)
-    
+
     fbird=1.8
 
     loc_silabas=np.greater(env,umbral*fbird)
